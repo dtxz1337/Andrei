@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Andrei Petrovichev - IT tudeng TTHK-s. Python programmeerimise portfoolio.">
+<meta name="keywords" content="IT, Python, TTHK, portfoolio, programmeerimine">
+<meta name="author" content="Andrei Petrovichev">
+    <title>Projektid - Andrei Petrovichev</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👨‍💻</text></svg>">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-container">
+            <div class="nav-logo" title="Tagasi avalehele">AP</div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Avaleht</a></li>
+                <li><a href="eesmark.html">Eesmärgid</a></li>
+                <li class="has-dropdown">
+                    <a href="pohiopingud.html" class="active">Õpingud</a>
+                    <ul class="dropdown">
+                        <li><a href="pohiopingud.html">Python alused</a></li>
+                        <li><a href="projektid.html">Projektid</a></li>
+                    </ul>
+                </li>
+                <li><a href="veebipaevik.html">Päevik</a></li><li><a href="kontakt.html">Kontakt</a></li>
+            </ul>
+        </div>
+    </nav>
+    <main style="padding-top:100px">
+        <section class="section">
+            <div class="section-container">
+                <h2 class="section-title animate-on-scroll text-gradient">Python projekt</h2>
+                <p class="large-text animate-on-scroll" style="margin-bottom:2rem">Interaktiivne ostusnimekiri mis töötab brauseris!</p>
+                <div style="max-width:600px;margin:2rem auto;background:#1a1a1a;border-radius:15px;padding:2rem;border:2px solid #fff">
+                    <div style="text-align:center;margin-bottom:2rem;font-size:2rem;color:#fff">🛒 Ostusnimekiri</div>
+                    <div style="display:flex;gap:1rem;margin-bottom:1rem">
+                        <input type="text" id="itemName" placeholder="Toote nimi..." style="flex:1;padding:1rem;background:#0a0a0a;border:2px solid #333;color:#fff;font-size:1rem;border-radius:5px"/>
+                        <input type="number" id="itemQty" placeholder="Kogus" min="1" value="1" style="max-width:100px;padding:1rem;background:#0a0a0a;border:2px solid #333;color:#fff;font-size:1rem;border-radius:5px"/>
+                    </div>
+                    <div style="display:flex;gap:1rem;margin-bottom:2rem">
+                        <button onclick="addItem()" style="flex:1;padding:1rem;background:#fff;color:#000;border:none;cursor:pointer;font-size:1rem;font-weight:bold;border-radius:5px">➕ Lisa</button>
+                        <button onclick="clearAll()" style="flex:1;padding:1rem;background:#333;color:#fff;border:none;cursor:pointer;font-size:1rem;font-weight:bold;border-radius:5px">🧹 Tühjenda</button>
+                    </div>
+                    <ul id="shoppingList" style="list-style:none;padding:0;margin:0">
+                        <div style="text-align:center;color:#999;padding:2rem">📝 Nimekiri tühi</div>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <div class="footer-logo">AP</div>
+                    <p>IT tudeng TTHK-s</p>
+                </div>
+                <div class="footer-right">
+                    <p><p>&copy; 2025 Andrei Petrovichev</p>copy; 2025 Andrei Petrovichev</p><p style="color:#666;font-size:0.85rem;margin-top:0.5rem">📧 pda88615@gmail.com</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+    <script>
+    let shoppingList=[];function renderList(){const e=document.getElementById("shoppingList");if(0===shoppingList.length)return void(e.innerHTML='<div style="text-align:center;color:#999;padding:2rem">📝 Nimekiri tühi</div>');e.innerHTML=shoppingList.map(((e,t)=>'<li style="display:flex;justify-content:space-between;align-items:center;padding:1rem;background:#0a0a0a;border:2px solid #333;margin-bottom:0.5rem;border-radius:5px;color:#fff"><div><div style="font-size:1.1rem;font-weight:bold">'+e.name+'</div><div style="color:#999;font-size:0.9rem">'+e.qty+' tk</div></div><div style="display:flex;gap:0.5rem"><button onclick="decreaseQty('+t+')" style="padding:0.5rem 1rem;background:#fff;color:#000;border:none;cursor:pointer;border-radius:5px">➖</button><button onclick="increaseQty('+t+')" style="padding:0.5rem 1rem;background:#fff;color:#000;border:none;cursor:pointer;border-radius:5px">➕</button><button onclick="deleteItem('+t+')" style="padding:0.5rem 1rem;background:#333;color:#fff;border:none;cursor:pointer;border-radius:5px">🗑️</button></div></li>')).join("")}function addItem(){const e=document.getElementById("itemName"),t=document.getElementById("itemQty"),n=e.value.trim(),o=parseInt(t.value)||1;n?(shoppingList.push({name:n,qty:o}),e.value="",t.value="1",e.focus(),renderList()):alert("⚠️ Palun sisesta toote nimi!")}function deleteItem(e){confirm("Kas kustutada?")&&(shoppingList.splice(e,1),renderList())}function increaseQty(e){shoppingList[e].qty++,renderList()}function decreaseQty(e){shoppingList[e].qty>1?shoppingList[e].qty--:deleteItem(e),renderList()}function clearAll(){0===shoppingList.length?alert("ℹ️ Nimekiri on juba tühi!"):confirm("Kas tühjendada kogu nimekiri?")&&(shoppingList=[],renderList())}document.getElementById("itemName").addEventListener("keypress",(e=>{"Enter"===e.key&&addItem()})),document.getElementById("itemQty").addEventListener("keypress",(e=>{"Enter"===e.key&&addItem()})),renderList();
+    </script>
+</body>
+</html>
